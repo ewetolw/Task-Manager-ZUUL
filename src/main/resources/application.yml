@@ -1,0 +1,47 @@
+zuul:
+  routes:
+    app1:
+      path: /admin/**
+      sensitiveHeaders:
+      serviceId: app1Admin
+      stripPrefix: false
+    app2manager:
+      path: /manager/**
+      sensitiveHeaders:
+      serviceId: app2WorkerAndManager
+      stripPrefix: false
+    app2worker:
+        path: /manager/**
+        sensitiveHeaders:
+        serviceId: app2WorkerAndManager
+        stripPrefix: false
+    app1log:
+      path: /log1/**
+      sensitiveHeaders:
+      serviceId: app1Admin
+    app2log:
+      path: /log2/**
+      sensitiveHeaders:
+      serviceId: app2WorkerAndManager
+
+
+ribbon:
+  eureka:
+    enabled: false
+
+app1Admin:
+  ribbon:
+    listOfServers: app1c:9090
+
+app2WorkerAndManager:
+      ribbon:
+        listOfServers: app2c:9000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000

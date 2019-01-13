@@ -44,4 +44,4 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 10000
+             timeoutInMilliseconds: 10000
